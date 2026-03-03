@@ -19,11 +19,15 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 // Simple router
 switch ($page) {
 
-    case 'login':
-        $controller = new AuthController();
+   case 'login':
+    $controller = new AuthController();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $controller->login();
+    } else {
         $controller->index();
-        break;
-
+    }
+    break;
+    
     case 'logout':
         $controller = new AuthController();
         $controller->logout();
